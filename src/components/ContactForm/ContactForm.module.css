@@ -13,7 +13,7 @@
     width: 200px;
     display: flex;
     flex-direction: column;
-    color: red;
+    color: rgb(4, 148, 112);
     font-weight: bold;
     font-style: italic;
   }

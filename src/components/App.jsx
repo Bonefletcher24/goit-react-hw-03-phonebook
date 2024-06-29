@@ -1,7 +1,7 @@
-import { Component } from 'react';
-import { ContactForm } from '../components/ContactForm/ContactForm';
+import React, { Component } from 'react';
+import { ContactForm } from './ContactForm/ContactForm';
+import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { ContactList } from '../components/ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -13,6 +13,19 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    if (contacts) {
+      this.setState({ contacts: JSON.parse(contacts) });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
   addContact = newContact => {
     this.setState(prevState => ({
